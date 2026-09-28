@@ -183,25 +183,53 @@ document.addEventListener("DOMContentLoaded", () => {
   const envelopeCover = document.getElementById("envelope-cover");
   const musicCfg = config.music || {};
 
-  if (audio && musicCfg.url) {
-    audio.src = musicCfg.url;
+  if (audio) {
+    if (musicCfg.url) {
+      audio.src = musicCfg.url;
+    }
+    audio.load();
   }
 
-  function playAudio() {
-    if (!audio || !musicCfg.url) return;
-    audio.play().catch((err) => {
-      console.log("Audio playback waiting for interaction:", err);
-    });
+  let isAudioPlaying = false;
+  function startMusic() {
+    if (!audio || isAudioPlaying) return;
+    audio.volume = 1.0;
+    const playPromise = audio.play();
+    if (playPromise !== undefined) {
+      playPromise.then(() => {
+        isAudioPlaying = true;
+      }).catch((err) => {
+        console.log("Audio waiting for user gesture:", err);
+      });
+    }
   }
 
-  if (openCardBtn && envelopeCover) {
-    openCardBtn.addEventListener("click", () => {
+  function handleOpen() {
+    if (envelopeCover) {
       envelopeCover.classList.add("hidden");
-      if (musicCfg.autoplayOnOpen !== false && musicCfg.url) {
-        playAudio();
-      }
+    }
+    if (musicCfg.autoplayOnOpen !== false) {
+      startMusic();
+    }
+  }
+
+  if (openCardBtn) {
+    openCardBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      handleOpen();
     });
   }
+
+  if (envelopeCover) {
+    envelopeCover.addEventListener("click", handleOpen);
+  }
+
+  // Dự phòng: Chạm bất kỳ đâu trên màn hình sau khi mở thiệp sẽ kích hoạt nhạc nếu trước đó bị trình duyệt chặn
+  document.addEventListener("click", () => {
+    if (!isAudioPlaying && musicCfg.autoplayOnOpen !== false) {
+      startMusic();
+    }
+  });
 
   // 5. Hiệu ứng cánh hoa rơi (có thể bật/tắt từ config)
   function initPetals() {

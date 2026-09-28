@@ -9,9 +9,9 @@
 const WEDDING_CONFIG = {
   // 1. TIÊU ĐỀ TRANG VÀ THÔNG TIN CHIA SẺ (SEO & SOCIAL SHARE)
   meta: {
-    pageTitle: "Thiệp Mừng Cưới",
+    pageTitle: "Thiệp Cưới",
     description: "Trân trọng kính mời bạn đến chung vui trong ngày hạnh phúc của chúng tôi!",
-    ogTitle: "Thiệp Mừng Cưới",
+    ogTitle: "Thiệp Cưới",
     ogDescription: "Trân trọng kính mời bạn đến chung vui trong ngày trọng đại."
   },
 
@@ -70,12 +70,12 @@ const WEDDING_CONFIG = {
   // 7. THỜI GIAN & ĐỊA ĐIỂM TỔ CHỨC (EVENT & VENUE)
   event: {
     timeLabel: "VÀO LÚC",
-    time: "",
-    solarDateText: "",
-    lunarDateText: "",
-    venueName: "",
-    hall: "",
-    address: "",
+    time: " ",
+    solarDateText: " ",
+    lunarDateText: " ",
+    venueName: " ",
+    hall: " ",
+    address: " ",
     mapHintText: "Xem chỉ đường trên Google Maps ↗",
     googleMapsUrl: ""
   },
