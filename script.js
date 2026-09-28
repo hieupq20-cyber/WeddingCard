@@ -134,8 +134,8 @@ document.addEventListener("DOMContentLoaded", () => {
     setText("event-lunar", lunarVal);
 
     const venueVal = (event.venueName && event.venueName.trim()) ? event.venueName : "ĐỊA ĐIỂM TỔ CHỨC TIỆC CƯỚI";
-    const hallVal = (event.hall && event.hall.trim()) ? event.hall : "Trung tâm Tiệc cưới";
-    const addrVal = (event.address && event.address.trim()) ? event.address : "Địa chỉ: Số ... Đường ..., Quận/Huyện, Tỉnh/TP";
+    const hallVal = (event.hall && event.hall.trim()) ? event.hall : "Tư gia nhà trai";
+    const addrVal = (event.address && event.address.trim()) ? event.address : "Địa chỉ:";
 
     setText("event-venue", venueVal);
     setText("event-hall", hallVal);
