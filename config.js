@@ -94,7 +94,7 @@ const WEDDING_CONFIG = {
   // 10. NHẠC NỀN (BACKGROUND MUSIC)
   music: {
     // Link MP3 online hoặc đường dẫn file MP3 cục bộ (VD: "./nhac-cuoi.mp3")
-    url: "",
+    url: "./music.mp3",
     autoplayOnOpen: true                // Tự động phát khi bấm mở thiệp
   },
 
