@@ -1,0 +1,449 @@
+/* ==============================================================================
+   💍 THIỆP CƯỚI ĐƠN GIẢN & SANG TRỌNG (COMPACT LUXURY WEDDING CARD)
+   ============================================================================== */
+
+:root {
+  --primary-red: #85181a;          /* Đỏ đô truyền thống quý phái */
+  --gold-accent: #c49a45;          /* Vàng kim Champagne */
+  --gold-light: #e8d19b;
+  --gold-border: rgba(196, 154, 69, 0.45);
+  --paper-bg: #fdfaf6;             /* Giấy mỹ thuật trắng ngà */
+  --card-bg: #ffffff;
+  --text-main: #2b2623;
+  --text-muted: #736b64;
+  
+  --font-serif: 'Playfair Display', serif;
+  --font-classic: 'Cormorant Garamond', serif;
+  --font-heading: 'Cinzel', serif;
+  --font-cursive: 'Great Vibes', cursive;
+  --font-sans: 'Montserrat', sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: radial-gradient(circle at center, #f4ebe1 0%, #e2d2c1 100%);
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 12px;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Canvas cánh hoa nền */
+#effect-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 10;
+}
+
+
+
+/* ==============================================================================
+   💌 MÀN HÌNH BÌA MỞ THIỆP (NHANH GỌN, CHẠM LÀ MỞ NGAY)
+   ============================================================================== */
+.envelope-cover {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: radial-gradient(circle at center, #6b1416 0%, #300607 100%);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  transition: opacity 0.7s ease, visibility 0.7s ease;
+}
+
+.envelope-cover.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.seal-badge {
+  background: #ffffff;
+  border: 2px solid var(--gold-accent);
+  border-radius: 16px;
+  padding: 30px 24px;
+  text-align: center;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  width: 100%;
+  max-width: 340px;
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.seal-badge:hover {
+  transform: translateY(-4px) scale(1.02);
+}
+
+.monogram-icon {
+  font-size: 2.5rem;
+  margin-bottom: 8px;
+}
+
+.seal-text {
+  display: inline-block;
+  background: linear-gradient(135deg, var(--primary-red), #a01c1e);
+  color: #fff;
+  padding: 8px 24px;
+  border-radius: 25px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  box-shadow: 0 4px 15px rgba(133, 24, 26, 0.4);
+  margin-bottom: 14px;
+}
+
+.seal-guest {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: var(--text-main);
+  font-weight: 600;
+}
+
+/* ==============================================================================
+   💍 TẤM THIỆP CHÍNH (COMPACT CARD CONTAINER)
+   ============================================================================== */
+.card-container {
+  width: 100%;
+  max-width: 440px;
+  margin: auto;
+  z-index: 20;
+}
+
+.wedding-card {
+  position: relative;
+  background: var(--paper-bg);
+  border-radius: 14px;
+  padding: 24px 20px 20px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.15), 0 2px 6px rgba(0,0,0,0.06);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  text-align: center;
+}
+
+/* Khung viền chỉ vàng kim đôi tinh tế */
+.card-border {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  border: 1px solid var(--gold-border);
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+.card-border::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  right: 3px;
+  bottom: 3px;
+  border: 1px solid rgba(196, 154, 69, 0.2);
+  border-radius: 8px;
+}
+
+/* Logo Monogram chữ cái */
+.card-monogram {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid var(--gold-accent);
+  background: rgba(255, 255, 255, 0.8);
+  margin-bottom: 10px;
+  box-shadow: 0 2px 8px rgba(196, 154, 69, 0.15);
+}
+
+.monogram-letter {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--primary-red);
+}
+
+.monogram-and {
+  font-family: var(--font-cursive);
+  font-size: 1.1rem;
+  color: var(--gold-accent);
+}
+
+.card-heading {
+  margin-bottom: 12px;
+}
+
+.invitation-intro {
+  font-size: 0.68rem;
+  letter-spacing: 3px;
+  color: var(--gold-accent);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.wedding-title {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  letter-spacing: 2px;
+  color: var(--primary-red);
+  margin-top: 2px;
+}
+
+/* Hàng thông tin phụ mẫu 2 bên */
+.parents-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 12px 0 10px;
+  padding: 8px 10px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+  border: 1px dashed rgba(196, 154, 69, 0.3);
+}
+
+.parents-col {
+  flex: 1;
+}
+
+.family-label {
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--gold-accent);
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.parent-name {
+  font-size: 0.76rem;
+  color: var(--text-main);
+  line-height: 1.35;
+}
+
+.parents-divider {
+  color: var(--gold-accent);
+  font-size: 0.75rem;
+  padding: 0 4px;
+}
+
+.announce-text {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin: 10px 0 6px;
+}
+
+/* Tên Cô dâu & Chú rể */
+.couple-name-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 6px 0 14px;
+}
+
+.groom-name, .bride-name {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--primary-red);
+  flex: 1;
+}
+
+.heart-symbol {
+  font-size: 1.1rem;
+  color: #d62828;
+  animation: pulse 1.6s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+}
+
+/* Hộp kính mời khách riêng */
+.guest-box {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 10px 14px;
+  margin-bottom: 14px;
+  border: 1px solid var(--gold-border);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.guest-salutation {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--gold-accent);
+  font-weight: 600;
+  display: block;
+}
+
+.guest-name {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  color: var(--primary-red);
+  font-weight: 700;
+  margin: 2px 0;
+}
+
+.guest-desc {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+/* Khung Thời gian & Địa điểm (Rất rõ ràng) */
+.event-details-card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  margin-bottom: 16px;
+}
+
+.event-time-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #f0e9df;
+}
+
+.time-block {
+  text-align: right;
+  border-right: 2px solid var(--gold-accent);
+  padding-right: 14px;
+}
+
+.time-label {
+  display: block;
+  font-size: 0.65rem;
+  color: var(--gold-accent);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.time-value {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--primary-red);
+  line-height: 1.1;
+}
+
+.date-block {
+  text-align: left;
+}
+
+.solar-date {
+  font-weight: 700;
+  font-size: 0.88rem;
+  color: var(--text-main);
+  display: block;
+}
+
+.lunar-date {
+  font-size: 0.74rem;
+  color: var(--text-muted);
+}
+
+.venue-block-link {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  text-align: left;
+  text-decoration: none;
+  background: #faf6f0;
+  border: 1px dashed var(--gold-accent);
+  border-radius: 8px;
+  padding: 10px 12px;
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.venue-block-link:hover {
+  background: #f4ede1;
+  border-color: var(--primary-red);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(133, 24, 26, 0.1);
+}
+
+.venue-icon {
+  font-size: 1.3rem;
+  color: var(--primary-red);
+  margin-top: 3px;
+  flex-shrink: 0;
+}
+
+.venue-name {
+  font-size: 0.95rem;
+  color: var(--primary-red);
+  display: block;
+}
+
+.venue-hall {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--gold-accent);
+  display: block;
+  margin: 1px 0;
+}
+
+.venue-addr {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  line-height: 1.35;
+  display: block;
+}
+
+.venue-map-hint {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.72rem;
+  color: var(--primary-red);
+  font-weight: 600;
+  margin-top: 6px;
+  background: rgba(133, 24, 26, 0.08);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+
+.card-footer-msg {
+  font-size: 0.78rem;
+  color: var(--gold-accent);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin-top: 12px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.hidden {
+  display: none !important;
+}

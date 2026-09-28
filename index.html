@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title id="page-title">Thiệp Cưới</title>
+
+  <meta name="description" id="meta-description"
+    content="Trân trọng kính mời bạn đến chung vui trong ngày hạnh phúc của chúng tôi!">
+  <meta property="og:title" id="og-title" content="Thiệp Mừng Cưới">
+  <meta property="og:description" id="og-description"
+    content="Trân trọng kính mời bạn đến chung vui trong ngày trọng đại.">
+
+  <!-- Google Fonts: Sang trọng & Tối giản -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,600;0,700;1,400&display=swap"
+    rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Hiệu ứng cánh hoa rơi nhẹ nhàng -->
+  <canvas id="effect-canvas"></canvas>
+
+  <!-- Nhạc nền tự động phát khi chạm mở thiệp -->
+  <audio id="wedding-audio" loop preload="auto"></audio>
+
+  <!-- MÀN HÌNH PHONG BÌ THƯ MỞ ĐẦU NHANH GỌN (CHẠM ĐỂ MỞ) -->
+  <div id="envelope-cover" class="envelope-cover">
+    <div class="seal-badge" id="open-card-btn">
+      <div class="monogram-icon" id="seal-icon">💍</div>
+      <span class="seal-text" id="seal-text">MỞ THIỆP</span>
+      <p class="seal-guest" id="seal-guest-name"></p>
+    </div>
+  </div>
+
+  <!-- TẤM THIỆP CƯỚI CHÍNH (THIẾT KẾ VỪA VẶN MÀN HÌNH - KHÔNG DÀI DÒNG) -->
+  <div class="card-container" id="main-card">
+    <div class="wedding-card">
+
+      <!-- Viền hoa văn chỉ vàng hoàng gia -->
+      <div class="card-border"></div>
+
+      <!-- Logo Monogram chữ cái đầu -->
+      <div class="card-monogram">
+        <span class="monogram-letter" id="mono-groom"></span>
+        <span class="monogram-and" id="mono-and">&</span>
+        <span class="monogram-letter" id="mono-bride"></span>
+      </div>
+
+      <div class="card-heading">
+        <p class="invitation-intro" id="invitation-intro"></p>
+        <h3 class="wedding-title" id="wedding-title"></h3>
+      </div>
+
+      <!-- Thông tin 2 bên gia đình -->
+      <div class="parents-row">
+        <div class="parents-col">
+          <span class="family-label" id="side-groom"></span>
+          <p class="parent-name" id="father-groom"></p>
+          <p class="parent-name" id="mother-groom"></p>
+        </div>
+        <div class="parents-divider" id="parents-divider">❖</div>
+        <div class="parents-col">
+          <span class="family-label" id="side-bride"></span>
+          <p class="parent-name" id="father-bride"></p>
+          <p class="parent-name" id="mother-bride"></p>
+        </div>
+      </div>
+
+      <p class="announce-text" id="announce-text"></p>
+
+      <!-- Tên Cô Dâu & Chú Rể -->
+      <div class="couple-name-box">
+        <div class="groom-name" id="groom-name"></div>
+        <div class="heart-symbol" id="heart-symbol">❤</div>
+        <div class="bride-name" id="bride-name"></div>
+      </div>
+
+      <!-- Tên khách mời trân trọng -->
+      <div class="guest-box">
+        <span class="guest-salutation" id="card-salutation"></span>
+        <h2 class="guest-name" id="card-guest-name"></h2>
+        <p class="guest-desc" id="guest-desc"></p>
+      </div>
+
+      <!-- Khung thời gian & Địa điểm nổi bật -->
+      <div class="event-details-card">
+        <div class="event-time-row">
+          <div class="time-block">
+            <span class="time-label" id="time-label">VÀO LÚC</span>
+            <span class="time-value" id="event-time"></span>
+          </div>
+          <div class="date-block">
+            <span class="solar-date" id="event-solar"></span>
+            <span class="lunar-date" id="event-lunar"></span>
+          </div>
+        </div>
+
+        <!-- Địa điểm tổ chức tích hợp tính năng chạm để mở Google Maps chỉ đường -->
+        <a href="#" target="_blank" id="event-venue-link" class="venue-block-link" title="Bấm để mở bản đồ chỉ đường">
+          <div class="venue-icon"><i class="fa-solid fa-location-dot"></i></div>
+          <div class="venue-text">
+            <strong class="venue-name" id="event-venue"></strong>
+            <span class="venue-hall" id="event-hall"></span>
+            <span class="venue-addr" id="event-address"></span>
+            <span class="venue-map-hint" id="venue-map-hint"><i class="fa-solid fa-diamond-turn-right"></i> Xem chỉ
+              đường trên Google Maps ↗</span>
+          </div>
+        </a>
+      </div>
+
+      <div class="card-footer-msg">
+        <p id="footer-msg"></p>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+
+</html>
