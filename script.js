@@ -120,56 +120,40 @@ document.addEventListener("DOMContentLoaded", () => {
     setText("bride-name", brideName);
     setText("heart-symbol", couple.heartSymbol || "❤");
 
-    // Thời gian & Địa điểm
+    // Thời gian & Địa điểm (Luôn hiển thị khung và tiêu đề, giữ chỗ cho nội dung)
     const event = config.event || {};
-    const timeBlock = document.querySelector(".time-block");
-    if (event.time && event.time.trim() !== "") {
-      setText("time-label", event.timeLabel || "VÀO LÚC");
-      setText("event-time", event.time);
-      if (timeBlock) timeBlock.style.display = "";
-    } else {
-      setText("time-label", "");
-      setText("event-time", "");
-      if (timeBlock) timeBlock.style.display = "none";
-    }
-    setText("event-solar", event.solarDateText || "");
-    setText("event-lunar", event.lunarDateText ? `(${event.lunarDateText})` : "");
 
-    const eventTimeRow = document.querySelector(".event-time-row");
-    const hasTimeOrDate = (event.time && event.time.trim() !== "") ||
-                          (event.solarDateText && event.solarDateText.trim() !== "") ||
-                          (event.lunarDateText && event.lunarDateText.trim() !== "");
-    if (eventTimeRow) {
-      eventTimeRow.style.display = hasTimeOrDate ? "" : "none";
-    }
+    const timeLabel = (event.timeLabel && event.timeLabel.trim()) ? event.timeLabel : "VÀO LÚC";
+    const timeVal = (event.time && event.time.trim()) ? event.time : "--:--";
+    const solarVal = (event.solarDateText && event.solarDateText.trim()) ? event.solarDateText : "Ngày ... Tháng ... Năm ...";
+    const lunarVal = (event.lunarDateText && event.lunarDateText.trim()) ? `(${event.lunarDateText})` : "(Âm lịch: Ngày ... Tháng ...)";
 
-    setText("event-venue", event.venueName || "");
-    setText("event-hall", event.hall || "");
-    setText("event-address", event.address || "");
+    setText("time-label", timeLabel);
+    setText("event-time", timeVal);
+    setText("event-solar", solarVal);
+    setText("event-lunar", lunarVal);
+
+    const venueVal = (event.venueName && event.venueName.trim()) ? event.venueName : "ĐỊA ĐIỂM TỔ CHỨC TIỆC CƯỚI";
+    const hallVal = (event.hall && event.hall.trim()) ? event.hall : "Trung tâm Tiệc cưới";
+    const addrVal = (event.address && event.address.trim()) ? event.address : "Địa chỉ: Số ... Đường ..., Quận/Huyện, Tỉnh/TP";
+
+    setText("event-venue", venueVal);
+    setText("event-hall", hallVal);
+    setText("event-address", addrVal);
 
     const mapHintEl = document.getElementById("venue-map-hint");
-    if (mapHintEl && event.mapHintText) {
-      mapHintEl.innerHTML = `<i class="fa-solid fa-diamond-turn-right"></i> ${event.mapHintText}`;
+    if (mapHintEl) {
+      const hintText = (event.mapHintText && event.mapHintText.trim()) ? event.mapHintText : "Xem chỉ đường trên Google Maps ↗";
+      mapHintEl.innerHTML = `<i class="fa-solid fa-diamond-turn-right"></i> ${hintText}`;
     }
 
     const eventVenueLink = document.getElementById("event-venue-link");
-    const hasVenue = (event.venueName && event.venueName.trim() !== "") ||
-                     (event.hall && event.hall.trim() !== "") ||
-                     (event.address && event.address.trim() !== "");
     if (eventVenueLink) {
-      eventVenueLink.style.display = hasVenue ? "" : "none";
-      if (event.googleMapsUrl) {
+      if (event.googleMapsUrl && event.googleMapsUrl.trim()) {
         eventVenueLink.href = event.googleMapsUrl;
-        eventVenueLink.style.pointerEvents = "auto";
       } else {
         eventVenueLink.removeAttribute("href");
-        eventVenueLink.style.pointerEvents = "none";
       }
-    }
-
-    const eventDetailsCard = document.querySelector(".event-details-card");
-    if (eventDetailsCard) {
-      eventDetailsCard.style.display = (hasTimeOrDate || hasVenue) ? "" : "none";
     }
 
     // Lời kết / Footer message
