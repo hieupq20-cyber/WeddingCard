@@ -443,39 +443,3 @@ body {
 .hidden {
   display: none !important;
 }
-
-/* Nút bật/tắt nhạc tròn nổi góc trên bên phải */
-.music-toggle-btn {
-  position: fixed;
-  top: 18px;
-  right: 18px;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(255, 255, 255, 0.95);
-  border: 1.5px solid var(--gold-accent);
-  color: var(--primary-red);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.15rem;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.18);
-  cursor: pointer;
-  z-index: 1000;
-  transition: transform 0.2s ease, background 0.2s ease;
-  outline: none;
-}
-
-.music-toggle-btn:hover {
-  transform: scale(1.1);
-  background: #ffffff;
-}
-
-.music-toggle-btn.playing i {
-  animation: spinMusic 3.5s linear infinite;
-}
-
-@keyframes spinMusic {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
-}

@@ -181,49 +181,17 @@ document.addEventListener("DOMContentLoaded", () => {
   const audio = document.getElementById("wedding-audio");
   const openCardBtn = document.getElementById("open-card-btn");
   const envelopeCover = document.getElementById("envelope-cover");
-  const musicToggleBtn = document.getElementById("music-toggle-btn");
   const musicCfg = config.music || {};
 
   if (audio && musicCfg.url) {
     audio.src = musicCfg.url;
   }
 
-  function updateMusicBtnState(isPlaying) {
-    if (!musicToggleBtn) return;
-    if (isPlaying) {
-      musicToggleBtn.style.display = "flex";
-      musicToggleBtn.classList.add("playing");
-      musicToggleBtn.innerHTML = '<i class="fa-solid fa-compact-disc"></i>';
-      musicToggleBtn.title = "Bấm để tắt nhạc";
-    } else {
-      musicToggleBtn.style.display = "flex";
-      musicToggleBtn.classList.remove("playing");
-      musicToggleBtn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
-      musicToggleBtn.title = "Bấm để phát nhạc";
-    }
-  }
-
   function playAudio() {
     if (!audio || !musicCfg.url) return;
-    audio.play().then(() => {
-      updateMusicBtnState(true);
-    }).catch((err) => {
+    audio.play().catch((err) => {
       console.log("Audio playback waiting for interaction:", err);
     });
-  }
-
-  function toggleAudio() {
-    if (!audio || !musicCfg.url) return;
-    if (audio.paused) {
-      audio.play().then(() => updateMusicBtnState(true));
-    } else {
-      audio.pause();
-      updateMusicBtnState(false);
-    }
-  }
-
-  if (musicToggleBtn) {
-    musicToggleBtn.addEventListener("click", toggleAudio);
   }
 
   if (openCardBtn && envelopeCover) {

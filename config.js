@@ -18,7 +18,7 @@ const WEDDING_CONFIG = {
   // 2. MÀN HÌNH BÌA MỞ THIỆP (ENVELOPE COVER)
   cover: {
     sealIcon: "💍",                     // Biểu tượng trên con dấu mở thiệp
-    sealText: "MỞ THIỆP CƯỚI",          // Dòng chữ trên nút mở thiệp
+    sealText: "MỞ THIỆP",          // Dòng chữ trên nút mở thiệp
     sealGuestPrefix: "Kính gửi"         // Tiền tố khách mời trên phong bì bìa
   },
 
@@ -95,7 +95,8 @@ const WEDDING_CONFIG = {
   music: {
     // Link MP3 online hoặc đường dẫn file MP3 cục bộ (VD: "./nhac-cuoi.mp3")
     url: "./music.mp3",
-    autoplayOnOpen: true                // Tự động phát khi bấm mở thiệp
+    autoplayOnOpen: true,                // Tự động phát khi bấm mở thiệp
+    replay: true                         // Lặp lại nhạc
   },
 
   // TƯƠNG THÍCH NGƯỢC (dành cho các cấu hình phiên bản cũ nếu có)
